@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Nuestros Servicios{% endblock title %}
+
+
+
+
+
+{%block banner_slider%}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active ">
+      <img src="{%static 'images/banner/b4.jpg'%}" class="d-block w-100"    height="500" alt="...">
+    </div>
+
+   
+    <div class="carousel-item  ">
+      <img src="{%static 'images/banner/b5.jpg'%}" class="d-block w-100"    height="500"  alt="...">
+    </div>
+
+    <div class="carousel-item  ">
+      <img src="{%static 'images/banner/b6.jpg'%}" class="d-block w-100"   height="500" alt="...">
+    </div>
+
+    <div class="carousel-item  ">
+      <img src="{%static 'images/banner/b7.jpg'%}" class="d-block w-100"   height="500" alt="...">
+    </div>
+    
+    
+    
+  </div>
+</div>
+
+{%endblock banner_slider %}
+
+
+{%block informacion %}
+  <div class="container mt-1">
+    <div class="row bg-success text-center p-5 text-white border-bottom shadaow ">
+      <h1>Servicios</h1>
+      <small class="f5">
+        El Software de Formateo de Disco Duro es una herramienta esencial para borrar y limpiar completamente tu disco duro. Este software permite realizar un formateo a bajo nivel, eliminando de manera segura todos los datos del dispositivo. Ideal para reinstalar sistemas operativos o preparar discos duros para una nueva configuración. Con soporte para discos duros SATA, IDE, SSD y HDD, asegura un proceso rápido y efectivo.
+
+
+      </small>
+
+    </div>
+  </div>
+
+
+{% endblock informacion %}
+
+

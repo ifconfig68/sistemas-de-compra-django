@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Historial de Pedidos</h2>
+
+{% for pedido in pedidos %}
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        Pedido #{{ pedido.id }} –
+        Fecha: {{ pedido.fecha_creacion|date:"d/m/Y H:i" }} |
+        Procesado: {{ pedido.procesado }} |
+       
+      </div>
+      <div>
+        {% if  pedido.procesado and not pedido.pagado  %}
+          <form method="post" action="{% url 'pagar_pedido' pedido.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-success">
+             Pagar Servicio
+            </button>
+          </form>
+        {%elif pedido.pagado%} 
+        <span class="badge bg-secondary">Pagado</span> 
+        
+        {% endif %}
+      </div>
+    </div>
+    <div class="card-body">
+      <ul>
+        {% for servicio in pedido.servicios.all %}
+          <li>{{ servicio.nombre }} – ${{ servicio.precio }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% empty %}
+  <p>No tenés pedidos procesados aún.</p>
+{% endfor %}
+
+{% endblock content %}

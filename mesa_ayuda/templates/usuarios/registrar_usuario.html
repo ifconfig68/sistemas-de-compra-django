@@ -1,0 +1,39 @@
+{%extends "index.html"%}
+
+{% load static %}
+
+{% block content%}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% endif %}
+
+<form action="" method="post" class="col-4 mt-5 m-auto p-3 card">
+    <h3 class="text-center">Registrarse</h3>
+    {% csrf_token %}
+    
+    <input type="text" name="nombre" placeholder="Ingrese Nombre" class="form-control" /><br>
+    
+    <input type="email" name="correo" placeholder="Ingrese Correo" class="form-control" /><br>
+ 
+    <input type="password" name="contraseña" placeholder="Ingrese Contraseña" class="form-control mt-2" /><br>
+    
+    <input type="password" name="contraseña2" placeholder="Repita Contraseña" class="form-control mt-2" /><br>
+    <label>Rol</label>
+    <select name="rol" class="form-select" >
+        <option value="U" {% if data.rol == "U" %} selected="" {% endif %}>Usuario</option>
+        <option value="A" {% if data.rol == "A" %} selected="" {% endif %}>Administrador</option>
+        
+        
+    </select><br>
+
+
+    
+    <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+</form>
+{% endblock content%}

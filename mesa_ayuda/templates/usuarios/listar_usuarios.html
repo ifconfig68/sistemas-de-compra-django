@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content%}
+<h1>Usuarios </h1>
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% endif %}
+
+<table class=" table-info table table-striped table-hover table-sm">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NOMBRE</th>
+      <th>CORREO</th>
+      <th>FECHA CREACION</th>
+      <th>ROL</th>   
+      <th>ACCION</th>      
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for u in listar %}
+    <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.nombre }}</td>
+        <td>{{ u.correo }}</td>
+        <td>{{ u.fecha_creacion }}</td>
+        <td>{{ u.get_rol_display }}</td>
+        <td>
+          <a href="javascript:confirmar_eliminar('{% url 'eliminar_usuarios' u.id %}');" class="btn btn-warning">Eliminar</a>
+          <a href="#" class="btn btn-primary">Editar</a>
+        </td>
+        
+        
+    </tr>
+    {% endfor %}
+
+  </tbody>
+
+
+</table>
+
+   
+
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock content %}
+
+

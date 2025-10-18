@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content%}
+<h2>Pedidos Pendientes</h2>
+<form method="post" action="{% url 'procesar_pedidos' %}">
+  {% csrf_token %}
+  
+  {% for pedido in pedidos %}
+    <div class="card mb-3">
+      <div class="card-header">
+        <input type="checkbox" name="pedidos" value="{{ pedido.id }}">
+        Pedido #{{ pedido.id }} - Usuario: {{ pedido.usuario.nombre }} - {{ pedido.fecha_creacion }}
+      </div>
+      <div class="card-body">
+        <ul>
+          {% for servicio in pedido.servicios.all %}
+            <li>{{ servicio.nombre }} - ${{ servicio.precio }}</li>
+          {% endfor %}
+          <button type="submit" class="btn btn-success">Procesar</button>
+        </ul>
+      </div>
+    </div>
+  {% empty %}
+    <p>No hay pedidos pendientes.</p>
+  {% endfor %}
+
+  
+</form>
+
+{% endblock content %}

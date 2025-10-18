@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Agregar Servicios{% endblock title %}
+
+{% block content%}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% endif %}
+<form method="POST" class="card mt-3 col-5 p-3 m-auto">
+    {% csrf_token %}
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre" class="form-control" required="" value="{{ data.nombre }}"><br>
+
+    <label>Precio:</label>
+    <input type="text" name="precio" class="form-control" required="" value="{{ data.precio }}"><br>
+
+    <label>Descripcion:</label>
+    <input type="text" name="descripcion" class="form-control" required="" value="{{ data.descripcion }}"><br>
+
+    <label>Tipo:</label>
+    <select name="tipo" class="form-control">
+        <option value="P"  {% if data.tipo == "P"%}selected="" {%endif%} >Publicitario</option>
+        <option value="T"  {% if data.tipo == "T"%}selected="" {%endif%} >Tecnologico</option>         
+    </select>
+    
+    
+    <label>Activo:</label>    
+    <input type="checkbox" name="activo" class="form-control" {% if data.activo %}checked{% endif %}><br>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Guardar Servicio</button>
+       
+    </div>
+    
+
+
+
+
+    
+</form>
+
+
+
+
+
+   
+
+
+
+
+{% endblock content %}
